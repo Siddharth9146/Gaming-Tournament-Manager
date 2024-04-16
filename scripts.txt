@@ -1,0 +1,4 @@
+to run backend server
+```
+uvicorn index:app --reload      //in backend folder
+```
