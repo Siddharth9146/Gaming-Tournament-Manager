@@ -2,24 +2,27 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from urllib.parse import quote_plus
+from routes.routes import router
 
 
 app = FastAPI()
 
+app.include_router(router)
+
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from config.db import conn_string, playerCollection, tournamentCollection, matchCollection, leaderboardCollection
-
+from config.db import conn_string
 try:
     conn = MongoClient(conn_string)
     print("Connected successfully!!!")
 except:
     print("Could not connect to MongoDB")
 
-playerCollection.insert_one(dict(username="sid", tournamentHistory=[], matchHistory=[]))
-tournamentCollection.insert_one(dict(tournamentName="t1", tournamentType="knockout", tournamentParticipants=[], tournamentMatches=[], winner="", tournamentId=0, tournamentIsOver=False))
-matchCollection.insert_one(dict(matchName="m1", matchType="knockout", matchParticipants=[], matchWinner=""))
-leaderboardCollection.insert_one(dict(username="sid", tournamentHistory=[], matchHistory=[], Leaderboard={}))
+# code used for testing
+# playerCollection.insert_one(dict(username="sid", tournamentHistory=[], matchHistory=[]))
+# tournamentCollection.insert_one(dict(tournamentName="t1", tournamentType="knockout", tournamentParticipants=[], tournamentMatches=[], winner="", tournamentId=0, tournamentIsOver=False))
+# matchCollection.insert_one(dict(matchName="m1", matchType="knockout", matchParticipants=[], matchWinner=""))
+# leaderboardCollection.insert_one(dict(username="sid", tournamentHistory=[], matchHistory=[], Leaderboard={}))
 
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -37,17 +40,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-import requests
 
-url = "https://trackmania.p.rapidapi.com/players/search"
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
-querystring = {"search_query":"Riolu"}
-
-headers = {
-	"X-RapidAPI-Key": "97cf2144f5mshcca3dfb6a90ad1fp1bc664jsnf8d38d8e2ce2",
-	"X-RapidAPI-Host": "trackmania.p.rapidapi.com"
-}
-
-response = requests.get(url, headers=headers, params=querystring)
-
-print(response.json())
+#remove all matchName from matchcollection
+from config.db import matchCollection
+@app.get("/removeMatchName")
+async def remove_matchName():
+    matchCollection.update_many({}, {"$unset": {"matchName": ""}})
+    return {"message": "All matchName removed"}

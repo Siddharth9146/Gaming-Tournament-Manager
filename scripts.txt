@@ -1,4 +1,4 @@
-to run backend server
+to run backend server  (in backend folder)
 ```
-uvicorn index:app --reload      //in backend folder
+uvicorn index:app --reload     
 ```

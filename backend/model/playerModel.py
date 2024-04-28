@@ -1,8 +1,9 @@
 from pydantic import BaseModel
+from typing import List
 
 class Player(BaseModel):
     username: str
-    tournamentHistory: list[int] # list of tournament ids the player has been in
-    matchHistory: list[int] # list of match ids the player has been in
+    tournamentHistory: list[str] # list of tournament obj ids the player has been in
+    matchHistory: List[str] # list of match obj ids the player has been in
 
     #playerCollection.insert_one(dict(username="sid", tournamentHistory=[], matchHistory=[]))

@@ -15,5 +15,4 @@ db = conn.get_database("GamingTournament")
 playerCollection = db.get_collection("playerCollection")
 tournamentCollection = db.get_collection("tournamentCollection")
 matchCollection = db.get_collection("matchCollection")
-leaderboardCollection = db.get_collection("leaderboardCollection")
 

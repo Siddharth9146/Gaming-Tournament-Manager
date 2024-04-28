@@ -1,14 +1,15 @@
 from pydantic import BaseModel
+from typing import List
 
 class Tournament(BaseModel):
     tournamentName: str
     tournamentType: str
-    tournamentParticipants: list[str]
-    tournamentMatches: list[str]
+    tournamentParticipants: List[str] #usernames of the players in the tournament
+    tournamentMatches: List[str] #list of match obj ids in the tournament
     winner: str
-    tournamentId: int
     tournamentIsOver: bool
+    tournamentCode: str
+
+    
 
 
-#example of a tournament
-#tournamentCollection.insert_one(dict(tournamentName="t1", tournamentType="knockout", tournamentParticipants=[], tournamentMatches=[], winner="", tournamentId=0, tournamentIsOver=False))
