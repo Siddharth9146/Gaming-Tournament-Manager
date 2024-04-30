@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Login - Nexsus</title>
+    <style>
+        body {
+            background-image: url('your_background_image.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        main {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .title {
+            font-family: 'Star Forge', Arial, sans-serif; /* Star Forge font */
+            font-size: 20px;
+            cursor: pointer;
+            color: red; /* Neon red color */
+            text-shadow: 0 0 10px red; /* Neon red glow effect */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid red; /* Border color */
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .title:hover {
+            background-color: rgba(255, 0, 0, 0.2); /* Hover background color */
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div></div>
+        <div>
+            <a class="title" href="index.html">Nexsus</a> <!-- Nexsus title -->
+        </div>
+    </header>
+    <main>
+        <header>
+            <h1>Tournament Login</h1>
+        </header>
+        
+        <form action="match_creation.html" method="POST"> <!-- Assuming match_creation.html is the match creation page -->
+            <label for="tournament_code">Tournament Code:</label><br>
+            <input type="text" id="tournament_code" name="tournament_code" required><br>
+            <label for="tournament_name">Tournament Name:</label><br>
+            <input type="text" id="tournament_name" name="tournament_name" required><br><br>
+            <input type="submit" value="Proceed to Match Creation">
+        </form>
+    </main>
+</body>
+</html>
