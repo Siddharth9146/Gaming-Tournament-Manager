@@ -29,14 +29,15 @@ async def add_match(tournamentCode: str, match: Match):
     matchDict = match.dict()
     matchCollection.insert_one(matchDict)
     tournament = tournamentCollection.find_one({"tournamentCode": tournamentCode})
+    
     if tournament:
+#add match to tournamentMatches
         tournamentCollection.update_one({"_id": ObjectId(tournament["_id"])}, {"$push": {"tournamentMatches": str(matchDict["_id"])}})
-    
-        #set tournamentCode in match
-        matchCollection.update_one({"_id": ObjectId(matchDict["_id"])}, {"$set": {"tournamentCode": tournamentCode}})
-    
     else:
         raise HTTPException(status_code=404, detail="Tournament not found")
+    #add match to player matcheswon
+    winner = matchDict["matchWinner"]
+    playerCollection.update_one({"username ": winner}, {"$push": {"matcheswon": str(matchDict["_id"])}})
 @router.post("/addPlayer")
 async def add_player(player: Player):
     playerDict = player.dict()
@@ -71,3 +72,31 @@ async def add_match_column(tournamentId: str, columnName: str):
             matchCollection.update_one({"_id": ObjectId(match)}, {"$set": {columnName: ""}})
     else:
         raise HTTPException(status_code=404, detail="Tournament not found")
+    
+#find tournament winner by tournament code
+
+@router.get("/findTournamentWinner/{tournamentCode}")
+async def find_tournament_winner(tournamentCode: str):
+    tournament = tournamentCollection.find_one({"tournamentCode": tournamentCode})
+#calculate winner of the tournament, most match wins = winner
+    if tournament:
+        winner = ""
+        maxWins = 0
+        for player in tournament["tournamentParticipants"]:
+            playerInfo = playerCollection.find_one({"username": player})
+            if len(playerInfo["matchHistory"]) > maxWins:
+                maxWins = len(playerInfo["matchHistory"])
+                winner = player
+        tournamentCollection.update_one({"_id": ObjectId(tournament["_id"])}, {"$set": {"winner": winner}})
+        return winner
+    else:
+        raise HTTPException(status_code=404, detail="Tournament not found")
+    
+    # check if tournamentcode and tournament name matches
+@router.get("/checkTournamentCode/{tournamentCode}/{tournamentName}")
+async def check_tournament_code(tournamentCode: str, tournamentName: str):
+    tournament = tournamentCollection.find_one({"tournamentCode": tournamentCode})
+    if tournament:
+        if tournament["tournamentName"] == tournamentName:
+            return True
+    return False

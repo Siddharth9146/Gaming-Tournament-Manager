@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Creation - Nexsus</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Starforge&display=swap'); /* Import Star Forge font */
         body {
             background-image: url('your_background_image.jpg'); /* Background image */
             background-size: cover;
@@ -120,14 +121,14 @@
         </header>
         
         <section>
+            <script src="frontend/js/matchAdd.js"></script>
             <h2>Create New Match</h2>
-            <form action="create_match_process.php" method="POST"> <!-- Assuming create_match_process.php handles form submission -->
+            <form action="match_creation.html" onsubmit="return addMatch()" method="GET"> <!-- Assuming create_match_process.php handles form submission -->
                 <label for="match_name">Match Name:</label><br>
                 <input type="text" id="match_name" name="match_name" required><br>
                 <label for="match_participants">Match Participants:</label><br>
                 <input type="text" id="match_participants" name="match_participants" placeholder="Enter participant names, separated by commas" required><br>
-                <label for="tournament_code">Tournament Code:</label><br>
-                <input type="text" id="tournament_code" name="tournament_code" required><br><br>
+
                 <input type="submit" value="Create Match">
             </form>
         </section>

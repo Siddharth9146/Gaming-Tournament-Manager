@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament Login - Nexsus</title>
+    <title>Match Creation - Nexsus</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Starforge&display=swap'); /* Import Star Forge font */
         body {
             background-image: url('your_background_image.jpg'); /* Background image */
             background-size: cover;
@@ -23,7 +24,7 @@
             background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
             padding: 20px;
             border-radius: 10px;
-            width: 60%;
+            width: 80%;
             text-align: center;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
         }
@@ -85,6 +86,26 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 8px;
+            color: #fff;
+        }
+
+        th {
+            background-color: #4CAF50;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -96,16 +117,22 @@
     </header>
     <main>
         <header>
-            <h1>Tournament Login</h1>
+            <h1>Player Data</h1>
         </header>
-        <script src="frontend/js/tournamentLogin.js"></script>
-        <form id="tournament_login" action="match_creation.html" method="GET"> <!-- Assuming match_creation.html is the match creation page -->
-            <label for="tournament_code">Tournament Code:</label><br>
-            <input type="text" id="tournament_code" name="tournament_code" required><br>
-            <label for="tournament_name">Tournament Name:</label><br>
-            <input type="text" id="tournament_name" name="tournament_name" required><br><br>
-            <input type="submit" value="Proceed to Match Creation">
+        <script src="tournament.js"></script>
+        <form id="player_username">
+            <label for="player_username">Player username:</label>
+            <input type="text" id="player_username" name="player_username" required><br>
+
         </form>
+
+        <section>
+            <h2>player data</h2>
+            <table id="playerdata">
+               
+                <!-- Add more rows for additional matches -->
+            </table>
+        </section>
     </main>
 </body>
 </html>

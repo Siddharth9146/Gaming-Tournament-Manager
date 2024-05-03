@@ -45,9 +45,4 @@ app.add_middleware(
 async def root():
     return {"message": "Hello World"}
 
-#remove all matchName from matchcollection
-from config.db import matchCollection
-@app.get("/removeMatchName")
-async def remove_matchName():
-    matchCollection.update_many({}, {"$unset": {"matchName": ""}})
-    return {"message": "All matchName removed"}
+
