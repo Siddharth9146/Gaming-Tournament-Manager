@@ -22,12 +22,25 @@ xdg-open for-vanshita/index.html
 - A clickable envelope with a hidden love letter (and a heart burst when it opens)
 - Soft floating hearts drifting up the screen, the whole time
 
+## Adding your real photos
+
+The gallery is already wired up to use real photos. Just drop the 5 pictures
+into `photos/` with these exact filenames:
+
+- `photos/photo1.jpg` — the blackboard selfie (caption: *"Side by side, always"*)
+- `photos/photo2.jpg` — Vanshita on the balcony at night (caption: *"You, lighting up the night"*)
+- `photos/photo3.jpg` — the daytime outdoor selfie (caption: *"Quiet afternoons with you"*)
+- `photos/photo4.jpg` — the cozy bed selfie with the duck plushie (caption: *"Home is wherever you are"*)
+- `photos/photo5.jpg` — the Holi photo (caption: *"Colour, chaos, and you"*)
+
+See `photos/README.md` for more details. If any photo is missing the page still
+looks lovely — it shows a soft pink fallback card instead.
+
 ## Making it yours
 
 Everything is editable in plain HTML — open `index.html` and:
 
-- Swap the memory captions in the `.memory` blocks for real stories you two share
-- Swap the emoji "art" (`✨`, `☕`, `🌺`, etc.) for real photos by replacing each `<div class="memory-art art-N">…</div>` with `<img src="path/to/photo.jpg" alt="">`
+- Edit any memory caption inside the `.memory` blocks
 - Edit the letter text inside `.letter-content`
 - Tweak the list items inside `.reasons-list`
 
