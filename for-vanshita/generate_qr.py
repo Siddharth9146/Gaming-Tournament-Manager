@@ -14,7 +14,10 @@ import qrcode
 from qrcode.constants import ERROR_CORRECT_H
 from PIL import Image, ImageDraw, ImageFont
 
-DEFAULT_URL = "https://siddharth9146.github.io/Gaming-Tournament-Manager/"
+DEFAULT_URL = (
+    "https://rawcdn.githack.com/Siddharth9146/Gaming-Tournament-Manager/"
+    "claude/gift-girlfriend-kllhO/for-vanshita/index.html"
+)
 
 PINK_DARK = (227, 80, 137)
 PINK_MID = (255, 143, 184)
