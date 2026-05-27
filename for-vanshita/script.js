@@ -1,3 +1,29 @@
+// ---------- Photo extension fallback ----------
+// Tries common image extensions before falling back to a pretty emoji card,
+// so the user can drop in photo1.jpg / photo1.jpeg / photo1.png / photo1.heic
+// without editing HTML.
+const PHOTO_FALLBACKS = {
+  1: { cls: 'art-1', emoji: '✨' },
+  2: { cls: 'art-2', emoji: '\u{1F303}' },
+  3: { cls: 'art-3', emoji: '\u{1F33F}' },
+  4: { cls: 'art-4', emoji: '\u{1F36E}' },
+  5: { cls: 'art-5', emoji: '\u{1F308}' },
+};
+
+const PHOTO_EXTENSIONS = ['jpg', 'jpeg', 'JPG', 'JPEG', 'png', 'PNG', 'webp', 'heic', 'HEIC'];
+
+window.tryPhoto = function (imgEl, idx) {
+  const attempt = (imgEl._extIdx || 0);
+  if (attempt < PHOTO_EXTENSIONS.length - 1) {
+    imgEl._extIdx = attempt + 1;
+    imgEl.src = `photos/photo${idx}.${PHOTO_EXTENSIONS[attempt + 1]}`;
+    return;
+  }
+  // give up — show the soft pink emoji fallback
+  const fb = PHOTO_FALLBACKS[idx] || { cls: 'art-1', emoji: '\u{1F496}' };
+  imgEl.outerHTML = `<div class="memory-art ${fb.cls}"><span class="art-emoji">${fb.emoji}</span></div>`;
+};
+
 // ---------- Floating Hearts ----------
 (function spawnHearts() {
   const layer = document.getElementById('heartsLayer');
